@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cowbfpwpht4p8"]
+
+[ext_resource type="Script" uid="uid://grqnjutvvd71" path="res://FirstGame/scenes/Bullet.cs" id="2_2o3ro"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w16xi"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Bullet" type="Node2D" parent="."]
+script = ExtResource("2_2o3ro")
+
+[node name="Sprite2D" type="Sprite2D" parent="Bullet"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bullet"]
+shape = SubResource("RectangleShape2D_w16xi")
