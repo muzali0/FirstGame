@@ -3,15 +3,15 @@
 [sub_resource type="CanvasTexture" id="CanvasTexture_gb3sb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_opose"]
-size = Vector2(565, 459)
+size = Vector2(333, 271)
 
 [node name="Player" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(271.867, 221.618)
-scale = Vector2(-542.733, 444.236)
+position = Vector2(166.052, 134.438)
+scale = Vector2(-331.104, 269.875)
 texture = SubResource("CanvasTexture_gb3sb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(272.5, 219.5)
+position = Vector2(165.5, 134.5)
 shape = SubResource("RectangleShape2D_opose")

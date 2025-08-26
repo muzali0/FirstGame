@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://5wwl8tgeslp8"]
+
+[ext_resource type="Script" uid="uid://p4owktpiac1g" path="res://FirstGame/scenes/Enemy.cs" id="1_e3tj7"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_7a8dl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e3tj7"]
+
+[node name="enemy" type="CharacterBody2D"]
+script = ExtResource("1_e3tj7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(20, 20)
+texture = SubResource("CanvasTexture_7a8dl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 2
+visibility_layer = 8
+shape = SubResource("RectangleShape2D_e3tj7")

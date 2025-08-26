@@ -1,11 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1fw3fh8igj1v"]
+[gd_scene load_steps=6 format=3 uid="uid://c1fw3fh8igj1v"]
 
 [ext_resource type="PackedScene" uid="uid://cbdnk1gg7f3v8" path="res://FirstGame/scenes/player.tscn" id="1_bpsay"]
 [ext_resource type="Script" uid="uid://boqpvnuvo7ojf" path="res://FirstGame/scenes/Player.cs" id="2_4b7gy"]
 [ext_resource type="PackedScene" uid="uid://cowbfpwpht4p8" path="res://FirstGame/scenes/bullet.tscn" id="3_gdmvg"]
+[ext_resource type="Script" uid="uid://bayhfonpbabr1" path="res://FirstGame/scenes/EnemySpawner.cs" id="4_mse5c"]
+[ext_resource type="PackedScene" uid="uid://5wwl8tgeslp8" path="res://FirstGame/scenes/enemy.tscn" id="5_36wd5"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_bpsay")]
 script = ExtResource("2_4b7gy")
 BulletScene = ExtResource("3_gdmvg")
+
+[node name="EnemySpawner" type="Node2D" parent="."]
+script = ExtResource("4_mse5c")
+EnemyScene = ExtResource("5_36wd5")
