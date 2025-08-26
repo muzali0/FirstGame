@@ -1,15 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://cowbfpwpht4p8"]
+[gd_scene load_steps=4 format=3 uid="uid://cowbfpwpht4p8"]
 
 [ext_resource type="Script" uid="uid://grqnjutvvd71" path="res://FirstGame/scenes/Bullet.cs" id="2_2o3ro"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w16xi"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_qa5lb"]
 
-[node name="Main" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_qa5lb"]
 
-[node name="Bullet" type="Node2D" parent="."]
+[node name="Bullet" type="Node2D"]
 script = ExtResource("2_2o3ro")
 
-[node name="Sprite2D" type="Sprite2D" parent="Bullet"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("CanvasTexture_qa5lb")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bullet"]
-shape = SubResource("RectangleShape2D_w16xi")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qa5lb")

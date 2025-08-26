@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1fw3fh8igj1v"]
+[gd_scene load_steps=4 format=3 uid="uid://c1fw3fh8igj1v"]
 
 [ext_resource type="PackedScene" uid="uid://cbdnk1gg7f3v8" path="res://FirstGame/scenes/player.tscn" id="1_bpsay"]
 [ext_resource type="Script" uid="uid://boqpvnuvo7ojf" path="res://FirstGame/scenes/Player.cs" id="2_4b7gy"]
+[ext_resource type="PackedScene" uid="uid://cowbfpwpht4p8" path="res://FirstGame/scenes/bullet.tscn" id="3_gdmvg"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_bpsay")]
 script = ExtResource("2_4b7gy")
+BulletScene = ExtResource("3_gdmvg")

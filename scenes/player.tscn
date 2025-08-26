@@ -1,10 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbdnk1gg7f3v8"]
+[gd_scene load_steps=3 format=3 uid="uid://cbdnk1gg7f3v8"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_gb3sb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_opose"]
+size = Vector2(565, 459)
 
 [node name="Player" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(271.867, 221.618)
+scale = Vector2(-542.733, 444.236)
+texture = SubResource("CanvasTexture_gb3sb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(272.5, 219.5)
 shape = SubResource("RectangleShape2D_opose")
