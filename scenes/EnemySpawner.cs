@@ -3,32 +3,44 @@ using System;
 
 public partial class EnemySpawner : Node2D
 {
-	[Export] public PackedScene EnemyScene;   // Drag Enemy.tscn here
-	[Export] public float SpawnRate = 1.0f;    // Seconds between spawns
+	[Export] public PackedScene EnemyScene;
+	[Export] public float SpawnInterval = 2f;
+	[Export] public int MaxEnemies = 10;
+	[Export] public Vector2 SpawnAreaSize = new Vector2(800, 450);
+	[Export] public KillCounter KillCounter; // assign the KillCounter node here
 
 	private float _spawnTimer = 0f;
-	private RandomNumberGenerator _rng = new RandomNumberGenerator();
 
 	public override void _Process(double delta)
 	{
 		_spawnTimer -= (float)delta;
-		if (_spawnTimer <= 0)
+
+		if (_spawnTimer <= 0 && GetChildCount() < MaxEnemies)
 		{
 			SpawnEnemy();
-			_spawnTimer = SpawnRate;
+			_spawnTimer = SpawnInterval;
 		}
 	}
 
 	private void SpawnEnemy()
 	{
-		if (EnemyScene == null) return;
+		if (EnemyScene == null)
+		{
+			GD.PrintErr("EnemyScene not assigned!");
+			return;
+		}
 
-		var enemy = (Node2D)EnemyScene.Instantiate();
+		Enemy enemy = EnemyScene.Instantiate<Enemy>();
 
-		// Random X position inside screen width (example: 0-800)
-		_rng.Randomize();
-		float x = _rng.RandfRange(50, 750);
-		enemy.Position = new Vector2(x, -50); // spawn above screen
+		// Random position inside spawn area
+		Vector2 spawnPos = new Vector2(
+			(float)GD.RandRange(0, SpawnAreaSize.X),
+			(float)GD.RandRange(0, SpawnAreaSize.Y)
+		);
+		enemy.Position = spawnPos;
+
+		// Assign KillCounter
+		enemy.KillCounter = KillCounter;
 
 		AddChild(enemy);
 	}

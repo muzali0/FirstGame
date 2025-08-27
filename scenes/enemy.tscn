@@ -6,7 +6,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e3tj7"]
 
-[node name="enemy" type="CharacterBody2D"]
+[node name="enemy" type="CharacterBody2D" groups=["Enemies"]]
 script = ExtResource("1_e3tj7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -17,3 +17,7 @@ texture = SubResource("CanvasTexture_7a8dl")
 light_mask = 2
 visibility_layer = 8
 shape = SubResource("RectangleShape2D_e3tj7")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]

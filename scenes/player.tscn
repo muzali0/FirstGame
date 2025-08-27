@@ -1,17 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://cbdnk1gg7f3v8"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_gb3sb"]
+[ext_resource type="Texture2D" uid="uid://dd34iudllim4f" path="res://FirstGame/scenes/player.png" id="1_opose"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_opose"]
-size = Vector2(333, 271)
+size = Vector2(18, 27)
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="CharacterBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(166.052, 134.438)
-scale = Vector2(-331.104, 269.875)
-texture = SubResource("CanvasTexture_gb3sb")
+position = Vector2(-2, 0)
+texture = ExtResource("1_opose")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(165.5, 134.5)
+position = Vector2(-2, 0)
 shape = SubResource("RectangleShape2D_opose")
+
+[node name="BulletSpawn" type="Marker2D" parent="."]
+position = Vector2(7, -1)

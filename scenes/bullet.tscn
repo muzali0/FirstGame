@@ -19,3 +19,6 @@ texture = SubResource("CanvasTexture_qa5lb")
 light_mask = 8
 visibility_layer = 2
 shape = SubResource("CircleShape2D_qa5lb")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]

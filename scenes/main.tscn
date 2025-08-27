@@ -1,17 +1,40 @@
-[gd_scene load_steps=6 format=3 uid="uid://c1fw3fh8igj1v"]
+[gd_scene load_steps=7 format=3 uid="uid://c1fw3fh8igj1v"]
 
+[ext_resource type="Script" uid="uid://bmv5e5v4ti67c" path="res://KillCounter.cs" id="1_0qrur"]
 [ext_resource type="PackedScene" uid="uid://cbdnk1gg7f3v8" path="res://FirstGame/scenes/player.tscn" id="1_bpsay"]
 [ext_resource type="Script" uid="uid://boqpvnuvo7ojf" path="res://FirstGame/scenes/Player.cs" id="2_4b7gy"]
 [ext_resource type="PackedScene" uid="uid://cowbfpwpht4p8" path="res://FirstGame/scenes/bullet.tscn" id="3_gdmvg"]
 [ext_resource type="Script" uid="uid://bayhfonpbabr1" path="res://FirstGame/scenes/EnemySpawner.cs" id="4_mse5c"]
 [ext_resource type="PackedScene" uid="uid://5wwl8tgeslp8" path="res://FirstGame/scenes/enemy.tscn" id="5_36wd5"]
 
-[node name="Main" type="Node2D"]
+[node name="World" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_bpsay")]
+position = Vector2(11, 14)
 script = ExtResource("2_4b7gy")
 BulletScene = ExtResource("3_gdmvg")
 
-[node name="EnemySpawner" type="Node2D" parent="."]
+[node name="EnemySpawner" type="Node2D" parent="." node_paths=PackedStringArray("KillCounter")]
 script = ExtResource("4_mse5c")
 EnemyScene = ExtResource("5_36wd5")
+MaxEnemies = 30
+KillCounter = NodePath("../KillCounter")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="KillLabel" type="Label" parent="UI"]
+anchors_preset = -1
+anchor_left = 0.035
+anchor_top = 0.001
+anchor_right = 0.035
+anchor_bottom = 0.001
+offset_left = -22.4
+offset_top = -0.36
+offset_right = 22.6
+offset_bottom = 22.64
+text = "Kills:0"
+horizontal_alignment = 1
+
+[node name="KillCounter" type="Node2D" parent="." node_paths=PackedStringArray("KillLabel")]
+script = ExtResource("1_0qrur")
+KillLabel = NodePath("../UI/KillLabel")

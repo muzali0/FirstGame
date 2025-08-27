@@ -1,56 +1,71 @@
 using Godot;
-using System;
 
-public partial class Player : Node2D
+public partial class Player : CharacterBody2D
 {
-	[Export] public float Speed = 300f;          // Player movement speed
-	[Export] public PackedScene BulletScene;     // Drag Bullet.tscn here
-	[Export] public float FireRate = 0.3f;       // Time between shots
+	[Export] public float Speed = 200f;
+	[Export] public PackedScene BulletScene;
+	[Export] public int MaxHealth = 5;
 
-	private float _fireCooldown = 0f;
+	private int currentHealth;
+	private float shootCooldown = 0.2f;
+	private float shootTimer = 0f;
+
+	public override void _Ready()
+	{
+		currentHealth = MaxHealth;
+	}
 
 	public override void _Process(double delta)
 	{
-		HandleMovement((float)delta);
+		HandleMovement(delta);
 		HandleShooting((float)delta);
 	}
 
-	private void HandleMovement(float delta)
+	private void HandleMovement(double delta)
 	{
 		Vector2 velocity = Vector2.Zero;
 
-		if (Input.IsActionPressed("ui_right")) velocity.X += 1;
-		if (Input.IsActionPressed("ui_left"))  velocity.X -= 1;
-		if (Input.IsActionPressed("ui_down"))  velocity.Y += 1;
-		if (Input.IsActionPressed("ui_up"))    velocity.Y -= 1;
+		if (Input.IsActionPressed("ui_right"))
+			velocity.X += 1;
+		if (Input.IsActionPressed("ui_left"))
+			velocity.X -= 1;
+		if (Input.IsActionPressed("ui_down"))
+			velocity.Y += 1;
+		if (Input.IsActionPressed("ui_up"))
+			velocity.Y -= 1;
 
-		velocity = velocity.Normalized() * Speed * delta;
-		Position += velocity;
+		Velocity = velocity.Normalized() * Speed;
+		MoveAndSlide();
 	}
 
 	private void HandleShooting(float delta)
 	{
-		_fireCooldown -= (float)delta;
+		shootTimer -= delta;
 
-		if (_fireCooldown > 0) return;
-
-		if (Input.IsMouseButtonPressed(MouseButton.Left))
+		if (Input.IsActionPressed("shoot") && shootTimer <= 0)
 		{
-			ShootAtMouse();
-			_fireCooldown = FireRate;
+			shootTimer = shootCooldown;
+
+			Bullet bullet = BulletScene.Instantiate<Bullet>();
+			GetParent().AddChild(bullet);
+
+			Vector2 mousePos = GetGlobalMousePosition();
+			Vector2 dir = (mousePos - GlobalPosition).Normalized();
+
+			bullet.Position = GlobalPosition;
+			bullet.Direction = dir;
 		}
 	}
 
-	private void ShootAtMouse()
+	public void TakeDamage(int amount)
 	{
-		if (BulletScene == null) return;
+		currentHealth -= amount;
+		GD.Print("Player HP: " + currentHealth);
 
-		Node2D bullet = (Node2D)BulletScene.Instantiate();
-		bullet.Position = GlobalPosition;
-
-		Vector2 direction = (GetGlobalMousePosition() - GlobalPosition).Normalized();
-		bullet.Set("Direction", direction); // Bullet.cs will use this
-
-		GetParent().AddChild(bullet);
+		if (currentHealth <= 0)
+		{
+			GD.Print("Player died!");
+			QueueFree();
+		}
 	}
 }
